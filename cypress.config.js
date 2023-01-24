@@ -6,6 +6,6 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
   },
-  watchForFileChanges: false , // Save the file and stops auto execution in cypress, by default value is true
-  video:true,
+  watchForFileChanges: false, // Save the file and stops auto execution in cypress, by default value is true
+  video: true,
 });
