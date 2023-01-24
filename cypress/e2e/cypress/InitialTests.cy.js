@@ -162,7 +162,7 @@ describe("Test", () => {
   });
 
   //Handle frames - second way ---- not working
-  it("Handle frames in second way - Test15", () => {
+  it.only("Handle frames in second way - Test15", () => {
     cy.login1und1(); //it is declared in cypress command
     cy.get("#login-button").click();
     cy.get("#login-email").type("int_01@mail.com");
