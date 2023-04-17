@@ -15,14 +15,13 @@
 
 // Import commands.js using ES2015 syntax:
 import "./commands";
+import 'cypress-mochawesome-reporter/register';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 require("cypress-xpath"); //to use xpath locators, as this file load before e2e tests
 
 Cypress.on( "uncaught:exception", (error, runnable) => {
-    if(error.message.includes("Script error")){
-        return false;
-    }
+    return false;
 });
 

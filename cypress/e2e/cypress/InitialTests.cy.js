@@ -63,7 +63,7 @@ describe("Test", () => {
   });
 
   //Mouse hover and click action
-  it.only("Mouse hover and click action - Test06", () => {
+  it("Mouse hover and click action - Test06", () => {
     cy.visit("https://www.flipkart.com/");
     cy.contains("Electronics").click();
     cy.get('._1kidPb > :nth-child(1)').trigger('mouseover');
@@ -134,7 +134,7 @@ describe("Test", () => {
 
   //Handle multiple windows in two ways - second way
   it("Handle windows by remove target attribute and click on it- Test13", () => {
-    cy.visit("https://www.sogeti.com/");
+    cy.visit("/");
     cy.get(".acceptCookie").click();
     cy.get(".sprite-global-arrowdown").click();
     cy.get("#country-list-id > ul > :nth-child(1) > a")
@@ -162,14 +162,15 @@ describe("Test", () => {
   });
 
   //Handle frames - second way ---- not working
-  it.only("Handle frames in second way - Test15", () => {
+  it("Handle frames in second way - Test15", () => {
     cy.login1und1(); //it is declared in cypress command
     cy.get("#login-button").click();
     cy.get("#login-email").type("int_01@mail.com");
     cy.get("#login-password").type("3457576545635345");
     cy.get("#header-login-box > form > .btn > span").click({ force: true }); // to click on element even if it is hidden or not visible
-    cy.frameLoaded('[data-test="third-party-frame_home"]', { timeout: 25000 });
-    cy.iframe('[data-test="third-party-frame_home"]')
+    //cy.frameLoaded('[data-test="third-party-frame_home"]', { timeout: 25000 });
+    cy.get('[data-test="third-party-frame_home"]')
+      .its("0.contentDocument.body")
       .then(cy.wrap)
       .find("a.mail")
       .click();
@@ -177,10 +178,26 @@ describe("Test", () => {
 
   //Scroll to bottom of the page
   it("Scroll to bottom of the page - Test16", () => {
-    cy.visit("https://www.globalsqa.com/samplepagetest/");
+    cy.visit(Cypress.env('scrollToBottom'));
     cy.scrollTo("bottom")
       .get("#menu-item-1919 > a")
       .invoke("removeAttr", "target")
       .click();
   });
 });
+
+
+  //How to debug cypress tests
+  it.only("Debug and pause the test in local - Test17", () => {
+    cy.login1und1(); //it is declared in cypress command
+    cy.get("#login-button").click();
+    cy.get("#login-email").type("int_01@mail.com").debug().pause(); //to debug and stop execution in local 
+    cy.get("#login-password").type("3457576545635345");
+    cy.get("#header-login-box > form > .btn > span").click();
+    cy.wait(25000);
+    cy.get('[data-test="third-party-frame_home"]')
+      .its("0.contentDocument.body")
+      .then(cy.wrap)
+      .find("a.mail")
+      .click();
+  });
