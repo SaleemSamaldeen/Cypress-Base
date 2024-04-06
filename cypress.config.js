@@ -6,6 +6,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
     },
+    defaultCommandTimeout : 25000
   },
   env: {
     scrollToBottom : "https://www.globalsqa.com/samplepagetest/"
@@ -15,7 +16,7 @@ module.exports = defineConfig({
   viewportHeight: 720,
   viewportWidth: 1000,
   defaultCommandTimeout: 10000,
-  chromeWebSecurity: false,  // to launch target link in a same window
+  chromeWebSecurity: false,  // to launch target link in a same window and cross-domain iFrame access
   screenshotOnRunFailure: true, //screenshot is possible if we run test cases from terminal
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {

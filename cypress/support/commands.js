@@ -36,3 +36,10 @@ Cypress.Commands.add('frame', () => {
     return cy.visit("https://www.mail.com/").wait(10000);
 });
 
+Cypress.Commands.add('loginMail', (username,password) => {
+  cy.visit("https://www.mail.com/", {timeout : 10000});
+  cy.get("#login-button").click();
+  cy.get("#login-email").type("int_01@mail.com");
+  cy.get("#login-password").type("3457576545635345");
+});
+

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test_headed": "npx cypress run --spec cypress\\e2e\\cypress\\InitialTests.cy.js --browser chrome --headed",
+    "test_headless": "npx cypress run --spec cypress\\e2e\\cypress\\InitialTests.cy.js --browser chrome --headless"
   },
   "author": "Saleem",
   "license": "ISC",

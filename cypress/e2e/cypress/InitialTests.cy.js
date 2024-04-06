@@ -1,5 +1,5 @@
 describe("Test", () => {
-  it("Verify cypress in built assertions - Test01", () => {
+  it.skip("Verify cypress in built assertions - Test01", () => {
     cy.visit("https://demo.nopcommerce.com/");
     cy.title().and("eq", "nopCommerce demo store"); //assertions
     cy.get(".ico-register").should("be.visible").should("exist");
@@ -8,12 +8,12 @@ describe("Test", () => {
     cy.xpath("//select[@name='DateOfBirthDay']//option").should(
       "have.length",
       "32"
-    ); //xpath locators
+    ); //xpath locators  //By Default cypress supports only CSS selectors, However we can use third party plugin to use Xpath selectors.
     cy.xpath("//select[@name='DateOfBirthDay']")
       .xpath("./option")
       .should("have.length", 32);
     cy.url().should("contain", "nopcommerce").and("include", "nopcommerce"); //assertions (Implicit in built cy assertions)
-  });
+  });  
 
   //chai or BDD assertions (Explicit assertions) //can be declared inside user defined js function
   it("Verify BDD assertions - Test02", () => {
@@ -31,7 +31,7 @@ describe("Test", () => {
   it("Verify TDD assertions - Test03", () => {
     cy.visit("https://demo.nopcommerce.com/");
     cy.get(".ico-register").click();
-    cy.get("#FirstName").type("Test automation");
+    cy.get("#FirstName").type('Test automation');
     cy.get("h1").then((value) => {
       let inputValue = value.text();
       assert.strictEqual(
@@ -83,6 +83,8 @@ describe("Test", () => {
     cy.visit("https://www.wikipedia.org/");
     cy.get("input#searchInput").type("India").click();
     cy.get("#typeahead-suggestions div a").contains("Indiana").click();
+    cy.url(); //get current url of the page
+    cy.url().should('include','https://www.wikipedia.org/');
   });
 
   //Select drop dowm from list - alternate way
@@ -109,7 +111,7 @@ describe("Test", () => {
   });
 
   //Handle alert and click cancel or confirm.
-  it("Handle alert and click cancel or confirm- Test11", () => {
+  it.only("Handle alert and click cancel or confirm- Test11", () => {
     cy.visit("https://testpages.herokuapp.com/styled/alerts/alert-test.html");
     cy.get("input#confirmexample").click();
     cy.on("window:confirm", (test) => {
@@ -121,7 +123,7 @@ describe("Test", () => {
   });
 
   //Handle multiple windows in two ways - first way
-  it("Handle windows by reading href value and launch url- Test12", () => {
+  it.only("Handle windows by reading href value and launch url- Test12", () => {
     cy.visit("https://www.sogeti.com/");
     cy.get(".acceptCookie").click();
     cy.get(".sprite-global-arrowdown").click();
@@ -188,16 +190,22 @@ describe("Test", () => {
 
 
   //How to debug cypress tests
-  it.only("Debug and pause the test in local - Test17", () => {
+  it.skip("Debug and pause the test in local - Test17", () => {
     cy.login1und1(); //it is declared in cypress command
     cy.get("#login-button").click();
     cy.get("#login-email").type("int_01@mail.com").debug().pause(); //to debug and stop execution in local 
     cy.get("#login-password").type("3457576545635345");
     cy.get("#header-login-box > form > .btn > span").click();
     cy.wait(25000);
+    cy.debug();
     cy.get('[data-test="third-party-frame_home"]')
       .its("0.contentDocument.body")
       .then(cy.wrap)
       .find("a.mail")
       .click();
   });
+
+
+// to access element finside shadow DOM
+
+//cy.get('.shadow-host').shadow().find('.my-button').click()
