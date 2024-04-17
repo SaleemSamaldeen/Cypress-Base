@@ -70,6 +70,14 @@ describe("Test", () => {
     cy.get("a[title='Apple']").click();
   });
 
+   //drag and drop - not completed
+   it("Mouse hover and click action - Test06", () => {
+    cy.visit("https://www.flipkart.com/");
+    cy.contains("Electronics").click();
+    cy.get('._1kidPb > :nth-child(1)').trigger('dragstart');
+    cy.get("a[title='Apple']").click();
+  });
+
   //Type into text box and click enter
   it("Mouse hover and click action - Test07", () => {
     cy.visit("https://demo.nopcommerce.com/");
