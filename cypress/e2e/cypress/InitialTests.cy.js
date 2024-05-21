@@ -153,7 +153,7 @@ describe("Test", () => {
     cy.wait(3000);
     cy.get(".acceptCookie").click();
     cy.url().should("equal", "https://www.sogeti.be/"); //remove target work with respective to domain
-    cy.go("back");
+    cy.go("back"); // to navigate to previous page
   });
 
   //Handle frames - one way
