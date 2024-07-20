@@ -17,6 +17,7 @@ context("UI test automation", () => {
         cy.get("#g2599-email").type(testData.email);
         cy.get("#g2599-website").type(testData.website);
         cy.get("#g2599-experienceinyears").select("7-10");
+        cy.loginMail(testData.username, testData.password);
       });
     });
 
